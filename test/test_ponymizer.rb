@@ -17,4 +17,18 @@ class PonymizerTest < Test::Unit::TestCase
     assert pony[0].size > 0
   end
 
+  def test_names
+    names = Ponymizer.new.names
+    names.each do |name|
+      assert_equal name.strip, name
+      assert name.strip.size > 0
+
+      # pony names can contain any unicode word character,
+      # as well as single spaces, dots, dashes and '
+      assert name =~ /^[\w\ \.\-']+$/u
+      assert !(name =~ /\s\s/u)
+      assert !(name =~ /[\.\-'][\.\-']/u)
+    end
+  end
+
 end

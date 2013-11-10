@@ -5,7 +5,7 @@ class Ponymizer
   # go to http://mlp.wikia.com/wiki/List_of_ponies and run
   # [].slice.apply(document.querySelectorAll('table.wikitable tr td:first-child'))
   #   .map(function(x){ return x.innerText }).join(', ')
-  NAMES = %Q(
+  @@NAMES = %Q(
     Applejack, Pinkie Pie, Fluttershy, Rainbow Dash, Rarity, Twilight Sparkle, Apple Bloom,
     Scootaloo, Sweetie Belle, Big McIntosh, Braeburn, Caramel, Mr. Carrot Cake, Mrs. Cup Cake,
     Cheerilee, Filthy Rich, Granny Smith, Ms. Harshwhinny, Hoity Toity, Mayor Mare, Ms. Peachbottom,
@@ -59,7 +59,7 @@ class Ponymizer
     Ivory, Jade, Long Jump, Night Knight, Paradise, Purple Polish, Quicksilver, Rapid Rush,
     Rose Quartz, Rubinstein, Sapphire Rose, Sugar Glass, Sunshine Splash, Toastie, Winnow Wind,
     Zirconic, Glass Slipper, Hope, Opal Bloom, Blaze, Fire Streak, Fleetfoot, High Winds,
-    Lightning Streak, Misty Fly, Rapidfire, Silver Lining, Surprise, Wave Chill, Crescent Pony
+    Lightning Streak, Misty Fly, Rapidfire, Silver Lining, Surprise, Wave Chill, Crescent Pony,
     Crescent Moon, Manerick, Whiplash, Airheart, April Showers, Big Shot, Blossomforth,
     Blue October, Blueberry Muffin, Blue Skies, Bluebell, Blueberry Cloud, Bluebird Happiness,
     Bon Voyage, Brolly, Buddy, Candy Floss, Cappuccino, Luke, Chocolate Blueberry, Cinnamon Swirl,
@@ -73,7 +73,7 @@ class Ponymizer
     Rainbow Drop, Rainbow Strike, Rainbowshine, Raindrops, Riverdance, Rivet, Rosewing, Sandstorm,
     Sassaflash, Score, Serenity, Sightseer, Silver Script, Silverspeed, Silverwing, Skyra,
     Slipstream, Snow Flight, Snowflake, Special Delivery, Spectrum, Spring Skies, Sprinkle Medley,
-    Star Hunter, Starburst, Stardancer, Starsong / Sugar Apple, Strawberry Sunrise, Stormfeather,
+    Star Hunter, Starburst, Stardancer, Starsong, Sugar Apple, Strawberry Sunrise, Stormfeather,
     Sunburst, Sunlight, Sunny Rays, Sunstone, Doctor Whooves, Thorn, Thunderlane, Tiger Lily,
     Tin Tailor, Tracy Flash, Shutterfly, Tropical Storm, Vanilla Skies, Wild Fire, Wild Flower,
     Wing Wishes, Yo-Yo, Gumdrop, Allie Way, Amethyst Star, Apple Polish, Apple Stars, Arpeggio,
@@ -106,7 +106,7 @@ class Ponymizer
     Unicorn King, Apple Brioche, Apple Brown Betty, Apple Cinnamon Crisp, Apple Tart,
     Babs Seed's big sis, Baked Apples, Bumpkin, Calamity Mane, Crystal Queen, Granny Pie,
     Mr. Kingpin, Namby-Pamby, Nana Pinkie, Thornhoof, Wild Bull Hickok
-  ).split(',').map(&:strip).freeze
+  ).split(/[,\n]/).map(&:strip).reject(&:empty?).freeze
 
   def initialize(options = {})
   end
@@ -116,8 +116,14 @@ class Ponymizer
     Array.new(options[:size]){ gimmie_a_pony! }
   end
 
+  # Array#sample is not supported on Ruby 1.8 so let's
+  # "brute-force" our way to a random array item here
   def gimmie_a_pony!
-    NAMES.shuffle.first
+    @@NAMES[Kernel.rand(@@NAMES.size)]
+  end
+
+  def names
+    @@NAMES
   end
 
 end
