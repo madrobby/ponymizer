@@ -117,7 +117,11 @@ class Ponymizer
   end
 
   def gimmie_a_pony!
-    NAMES.shuffle.first
+    if(NAMES.respond_to?(:choice))
+        return NAMES.choice
+    else
+        return NAMES.sample
+    end
   end
 
 end
