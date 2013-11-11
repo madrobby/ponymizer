@@ -25,9 +25,15 @@ class PonymizerTest < Test::Unit::TestCase
 
       # pony names can contain any unicode word character,
       # as well as single spaces, dots, dashes and '
-      assert name =~ /^[\w\ \.\-']+$/u
-      assert !(name =~ /\s\s/u)
-      assert !(name =~ /[\.\-'][\.\-']/u)
+      if RUBY_VERSION =~ /^1.8/
+        assert name =~ /^[\w\ \.\-']+$/u
+        assert !(name =~ /\s\s/u)
+        assert !(name =~ /[\.\-'][\.\-']/u)
+      else
+        assert name =~ /^[[[:alnum:]]\ \.\-']+$/
+        assert !(name =~ /\s\s/)
+        assert !(name =~ /[\.\-'][\.\-']/)
+      end
     end
   end
 
