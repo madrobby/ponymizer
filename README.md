@@ -6,7 +6,7 @@ Ponymizer 🐴
 You know, like "anonymizer" but with ponies. Add `gem "ponymizer"` to your ~~Ponyfile~~ Gemfile.
 
 ```ruby
-Ponymizer.new.gimme_a_pony!
+Ponymizer.new.gimmie_a_pony!
 # => "Sunshine Splash"
 ```
 
