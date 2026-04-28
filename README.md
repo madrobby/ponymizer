@@ -1,8 +1,6 @@
 Ponymizer 🐴
 ===========
 
-[![Build Status](https://travis-ci.org/madrobby/ponymizer.png)](https://travis-ci.org/madrobby/ponymizer)
-
 You know, like "anonymizer" but with ponies. Add `gem "ponymizer"` to your ~~Ponyfile~~ Gemfile.
 
 ```ruby
