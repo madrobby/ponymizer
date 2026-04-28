@@ -1,12 +1,17 @@
 GEM
-  remote: https://rubygems.org/
+  remote: https://gem.coop/
   specs:
-    rake (10.1.0)
-    test-unit (2.5.5)
+    power_assert (3.0.1)
+    rake (13.4.2)
+    test-unit (3.7.7)
+      power_assert
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   rake
-  test-unit (~> 2.5.4)
+  test-unit
+
+BUNDLED WITH
+   2.4.19

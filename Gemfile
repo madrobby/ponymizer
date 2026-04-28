@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
+source "https://gem.coop"
 
 group :test do
   gem "rake"
-  gem "test-unit", "~> 2.5.4"
+  gem "test-unit"
 end
